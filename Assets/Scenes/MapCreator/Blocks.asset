@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a16df99d69352c48bfc53bbf02ea62d, type: 3}
+  m_Name: Blocks
+  m_EditorClassIdentifier: 
+  Blocks:
+  - color: {r: 0, g: 0, b: 0, a: 1}
+    obj:
+    - {fileID: 1866461500774654, guid: a75b579f87812c44797587b6de376684, type: 3}
+    isStatic: 1
+    isShaded: 0
+  - color: {r: 1, g: 0, b: 0, a: 1}
+    obj:
+    - {fileID: 1571235623563798, guid: f52894ea6e88566439dc170f021c5f05, type: 3}
+    - {fileID: 1865146958215006, guid: b7b7ef1c1ba66fd4fbf0e9945939f2e0, type: 3}
+    - {fileID: 1948821674277208, guid: 673b0d62429ca5b4a8bda250dafadbac, type: 3}
+    - {fileID: 1502080106171610, guid: b1d962c63e1a93c4e97fbd74f1d468b7, type: 3}
+    isStatic: 1
+    isShaded: 0
+  - color: {r: 0.47843137, g: 0.47843137, b: 0.47843137, a: 1}
+    obj:
+    - {fileID: 1503304560085038, guid: 31108a8243a8f574e88dbf3282fec7c5, type: 3}
+    isStatic: 1
+    isShaded: 0
+  - color: {r: 0, g: 1, b: 0, a: 1}
+    obj:
+    - {fileID: 1076394005861882, guid: 06f787df46997ab4dba391e08deaa9c0, type: 3}
+    isStatic: 1
+    isShaded: 0
+  - color: {r: 0, g: 0, b: 1, a: 1}
+    obj:
+    - {fileID: 6917915043568839385, guid: 82ab8f5747887ba47851d5ab33e2ec68, type: 3}
+    isStatic: 0
+    isShaded: 1
