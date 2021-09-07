@@ -106,7 +106,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
                 if (isAdmin)
                 {
                     timeSinceRoomCreated += Time.deltaTime;
-                    if (timeSinceRoomCreated >= 120 && ok)
+                    if (timeSinceRoomCreated >= 3 && ok)
                     {
                         PhotonNetwork.LoadLevel(1);
                         ok = false;

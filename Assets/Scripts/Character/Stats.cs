@@ -19,8 +19,7 @@ public class Stats : MonoBehaviour
     public GameObject canvas;
     void Start()
     {
-        NickName = PhotonNetwork.NickName;
-        Text.text = NickName;
+        photonView.RPC(nameof(RegisterNickName), RpcTarget.All, photonView.Owner.NickName);
     }
 
     void Update()
@@ -40,6 +39,12 @@ public class Stats : MonoBehaviour
     {
         Hp -= hp;
         HpSlider.value = Hp;
+    }
+    [PunRPC]
+    void RegisterNickName(string name)
+    {
+        NickName = name;
+        Text.text = NickName;
     }
 
 }

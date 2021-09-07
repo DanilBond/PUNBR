@@ -78,7 +78,7 @@ public class CharacterMovement : MonoBehaviour
         {            
             transform.parent.Find("Canvas").gameObject.SetActive(false);
             transform.parent.Find("Main Camera").gameObject.SetActive(false);
-           // GetComponent<CharacterMovement>().enabled = false;
+            GetComponent<CapsuleCollider>().radius = 0.8f;
         }
     }
 

@@ -121,6 +121,75 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &34987200
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 807587897604937549, guid: 33a4847a2acf9284dbff57cf6184e99a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 807587897604937549, guid: 33a4847a2acf9284dbff57cf6184e99a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4.648563e-19
+      objectReference: {fileID: 0}
+    - target: {fileID: 807587897604937549, guid: 33a4847a2acf9284dbff57cf6184e99a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.92
+      objectReference: {fileID: 0}
+    - target: {fileID: 807587897604937549, guid: 33a4847a2acf9284dbff57cf6184e99a,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 807587897604937549, guid: 33a4847a2acf9284dbff57cf6184e99a,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 807587897604937549, guid: 33a4847a2acf9284dbff57cf6184e99a,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 807587897604937549, guid: 33a4847a2acf9284dbff57cf6184e99a,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 807587897604937549, guid: 33a4847a2acf9284dbff57cf6184e99a,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 807587897604937549, guid: 33a4847a2acf9284dbff57cf6184e99a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 807587897604937549, guid: 33a4847a2acf9284dbff57cf6184e99a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 807587897604937549, guid: 33a4847a2acf9284dbff57cf6184e99a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7973158084973307045, guid: 33a4847a2acf9284dbff57cf6184e99a,
+        type: 3}
+      propertyPath: m_Name
+      value: Item_Gloryhunter
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 33a4847a2acf9284dbff57cf6184e99a, type: 3}
 --- !u!1 &268754402
 GameObject:
   m_ObjectHideFlags: 0
