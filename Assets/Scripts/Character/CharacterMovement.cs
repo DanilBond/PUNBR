@@ -68,6 +68,7 @@ public class CharacterMovement : MonoBehaviour
     public bool IsAiming;
     public bool IsShooting;
     public bool isInZone;
+    public bool isDead;
 
     void Start()
     {
@@ -147,7 +148,8 @@ public class CharacterMovement : MonoBehaviour
                 timer -= Time.deltaTime;
                 if (timer <= 0f)
                 {
-
+                if (!isDead)
+                {
                     GameObject bul = Instantiate(Bullet, Muzzle.transform.position, Muzzle.transform.rotation);
                     bul.GetComponent<Bullet>().isFake = false;
                     bul.GetComponent<Bullet>().damage = inventory.currentItem.damage;
@@ -155,10 +157,13 @@ public class CharacterMovement : MonoBehaviour
                     Destroy(Eff, 1f);
                     timer = inventory.currentItem.shootRate;
                     inventory.currentAmmoCount--;
-                    photonView.RPC(nameof(FakeShoot), RpcTarget.All);
+
                     camPivot.GetComponent<Animator>().SetTrigger("Shake");
                     C_Audio.PlayAudio(inventory.currentItem.shootAudio);
+
+                    photonView.RPC(nameof(FakeShoot), RpcTarget.All);
                 }
+            }
         }
 
 
@@ -167,7 +172,7 @@ public class CharacterMovement : MonoBehaviour
 
     public void Moving()
     {
-        if (photonView.IsMine)
+        if (photonView.IsMine && !isDead)
         {
             Animations();
             Camera_AND_Input();
@@ -183,7 +188,10 @@ public class CharacterMovement : MonoBehaviour
                 if (inventory.currentAmmoCount > 0)
                 {
                     Shoot();
-                    MuzzleGraphical.SetActive(true);
+                    if (!isDead)
+                    {
+                        MuzzleGraphical.SetActive(true);
+                    }
                     isShooting = true;
                 }
             }

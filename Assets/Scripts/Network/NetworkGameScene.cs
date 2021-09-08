@@ -18,8 +18,8 @@ public class NetworkGameScene : MonoBehaviour
         {
             for (int i = 0; i < 10; i++)
             {
-                Vector3 pos = new Vector3(Random.Range(-20, 20), 0, Random.Range(-20, 20));
-                PhotonNetwork.Instantiate("Items/" + items[Random.Range(0, items.Length)].name, pos, Quaternion.identity);
+                Vector3 pos = new Vector3(Random.Range(-20, 20), 1.5f, Random.Range(-20, 20));
+                PhotonNetwork.InstantiateRoomObject("Items/" + items[Random.Range(0, items.Length)].name, pos, Quaternion.identity);
             }
         }
     }

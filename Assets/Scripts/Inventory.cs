@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 using UnityEngine.UI;
 using Michsky.UI.ModernUIPack;
 
@@ -15,6 +16,7 @@ public class Ammo
 
 public class Inventory : MonoBehaviour
 {
+    public PhotonView photonView;
     public Ammo ammo;
 
     public Item currentItem;
@@ -28,9 +30,11 @@ public class Inventory : MonoBehaviour
 
     public int currentAmmoCount;
 
-    float timer;
+    public float timer;
     void Start()
     {
+        if (photonView == null)
+            photonView = GetComponent<PhotonView>();
         StartCoroutine(Tick());
     }
 
@@ -42,29 +46,37 @@ public class Inventory : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if(other.gameObject.tag == "Item")
+        if (photonView.IsMine)
         {
-            timer += Time.deltaTime * 70f;
-            progressBar.gameObject.SetActive(true);
-            progressBar.currentPercent = timer;
-            if(timer >= 100f)
+            if (other.gameObject.tag == "Item")
             {
-                AddItem(other.GetComponent<PickableItem>().item);
-                Photon.Pun.PhotonNetwork.Destroy(other.gameObject);
-                progressBar.currentPercent = 0;
-                progressBar.gameObject.SetActive(false);
-                timer = 0f;
+                timer += Time.deltaTime * 70f;
+                progressBar.gameObject.SetActive(true);
+                progressBar.currentPercent = timer;
+                if (timer >= 100f)
+                {
+                    AddItem(other.GetComponent<PickableItem>().item);
+                    progressBar.currentPercent = 0;
+                    progressBar.gameObject.SetActive(false);
+                    timer = 0f;
+                    other.GetComponent<PickableItem>().DestroyItem();
+                }
             }
         }
     }
 
+    
+
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Item")
+        if (photonView.IsMine)
         {
-            progressBar.currentPercent = 0;
-            progressBar.gameObject.SetActive(false);
-            timer = 0f;
+            if (other.gameObject.tag == "Item")
+            {
+                progressBar.currentPercent = 0;
+                progressBar.gameObject.SetActive(false);
+                timer = 0f;
+            }
         }
     }
     public void AddItem(Item it)

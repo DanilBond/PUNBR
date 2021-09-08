@@ -46,9 +46,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 7991
   damage: 10
   speed: 35
+  isFake: 0
   Impact: {fileID: 1649514149693448, guid: d519ad6ef8ea3cd4f9acf13f6646a601, type: 3}
   Blood: {fileID: 193062, guid: 01949c12a89de284792dc4b7b7128404, type: 3}
 --- !u!1 &8699495711716588008

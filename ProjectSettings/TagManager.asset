@@ -9,6 +9,10 @@ TagManager:
   - Ground
   - Item
   - Zone
+  - HidePoint
+  - MapComponent
+  - Collide
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -23,7 +27,7 @@ TagManager:
   - FX
   - Ground
   - LayerMask
-  - 
+  - Zone
   - 
   - 
   - 

@@ -6,8 +6,6 @@ using TMPro;
 
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
-    
-
     public GameObject accountPanel;
     public GameObject loadPanel;
     public GameObject playButton;
@@ -24,11 +22,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public bool isMaster;
     public float timeSinceRoomCreated;
     public int currentPlayerCountOnTheRoom;
-    void Start()
-    {
-        
-        
-    }
 
     public void Init()
     {
@@ -107,7 +100,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
                 if (isAdmin)
                 {
                     timeSinceRoomCreated += Time.deltaTime;
-                    if (timeSinceRoomCreated >= 5 && ok)
+                    if (timeSinceRoomCreated >= 50 && ok)
                     {
                         PhotonNetwork.LoadLevel(1);
                         ok = false;

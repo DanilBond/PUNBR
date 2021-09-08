@@ -6,7 +6,6 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public LayerMask mask;
-    //[Header("VECTORS")]
 
     [Header("PARAMETERS")]
     public float damage;
@@ -22,7 +21,6 @@ public class Bullet : MonoBehaviour
     }
     private void FixedUpdate()
     {
-
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
         if (!isFake)
         {

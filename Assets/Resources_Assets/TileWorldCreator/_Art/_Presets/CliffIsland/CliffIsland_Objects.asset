@@ -28,13 +28,13 @@ MonoBehaviour:
     useRandomRotation: 1
     randomRotationMin: {x: 0, y: 0, z: 0}
     randomRotationMax: {x: 0, y: 360, z: 0}
-    useRandomScaling: 0
+    useRandomScaling: 1
     uniformScaling: 0
-    randomScalingMax: {x: 1, y: 1, z: 1}
-    randomScalingMin: {x: 1, y: 1, z: 1}
+    randomScalingMax: {x: 3, y: 3, z: 3}
+    randomScalingMin: {x: 3, y: 3, z: 3}
     showPanel: 1
     ruleType: 0
-    weight: 0.4
+    weight: 0.05
     blockType: 0
     tileTypes: 3
     everyNTile: 1
@@ -54,8 +54,8 @@ MonoBehaviour:
     randomRotationMax: {x: 0, y: 360, z: 0}
     useRandomScaling: 1
     uniformScaling: 1
-    randomScalingMax: {x: 1.2, y: 1.2, z: 1.2}
-    randomScalingMin: {x: 0.5, y: 0.5, z: 0.5}
+    randomScalingMax: {x: 4, y: 4, z: 4}
+    randomScalingMin: {x: 2, y: 2, z: 2}
     showPanel: 1
     ruleType: 0
     weight: 0.52
@@ -78,11 +78,11 @@ MonoBehaviour:
     randomRotationMax: {x: 0, y: 360, z: 0}
     useRandomScaling: 1
     uniformScaling: 1
-    randomScalingMax: {x: 1.5, y: 1.5, z: 1.5}
-    randomScalingMin: {x: 0.5, y: 0.5, z: 0.5}
+    randomScalingMax: {x: 6, y: 6, z: 6}
+    randomScalingMin: {x: 2, y: 2, z: 2}
     showPanel: 1
     ruleType: 0
-    weight: 0.3
+    weight: 0.01
     blockType: 0
     tileTypes: 3
     everyNTile: 1

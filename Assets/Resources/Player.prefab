@@ -10787,6 +10787,7 @@ MonoBehaviour:
   IsAiming: 0
   IsShooting: 0
   isInZone: 0
+  isDead: 0
 --- !u!136 &4556386000729291693
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -11045,6 +11046,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 588310bb6f785d547a8d3e2f0610d5a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  photonView: {fileID: 947398136415406668}
   ammo:
     rifleAmmo: 0
     pistolAmmo: 0
@@ -11068,6 +11070,7 @@ MonoBehaviour:
   currentWeaponImage: {fileID: 597959140930599874}
   progressBar: {fileID: 8313566349038570550}
   currentAmmoCount: 0
+  timer: 0
 --- !u!1 &7779965519504434527
 GameObject:
   m_ObjectHideFlags: 0
