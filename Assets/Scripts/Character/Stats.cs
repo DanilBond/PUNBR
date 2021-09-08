@@ -10,6 +10,7 @@ public class Stats : MonoBehaviour
     public Vector3 Offset;
 
     public float Hp;
+    public float zoneDamage;
     public string NickName;
 
     public Slider HpSlider;

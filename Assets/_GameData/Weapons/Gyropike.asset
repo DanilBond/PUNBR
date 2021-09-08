@@ -13,6 +13,12 @@ MonoBehaviour:
   m_Name: Gyropike
   m_EditorClassIdentifier: 
   type: 0
+  id: 5
   name: Gyropike
   sprite: {fileID: 21300000, guid: d4a0e91b9b7292045a27f1c88d9718b5, type: 3}
   prefab: {fileID: 7973158084973307045, guid: ec858b8c6dabd5d45a07d44f01f06c86, type: 3}
+  ammo: 6
+  ammoType: 1
+  shootRate: 0.75
+  shootAudio: {fileID: 8300000, guid: 38d95e38f52f6a54b888d9fd555fa1e3, type: 3}
+  damage: 40

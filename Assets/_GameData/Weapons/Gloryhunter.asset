@@ -13,6 +13,12 @@ MonoBehaviour:
   m_Name: Gloryhunter
   m_EditorClassIdentifier: 
   type: 0
+  id: 4
   name: Gloryhunter
   sprite: {fileID: 21300000, guid: 60d4b5f237ecfcc4fbba42b1ab108e30, type: 3}
   prefab: {fileID: 7973158084973307045, guid: 33a4847a2acf9284dbff57cf6184e99a, type: 3}
+  ammo: 40
+  ammoType: 0
+  shootRate: 0.15
+  shootAudio: {fileID: 8300000, guid: c922c34f559ead440a273a13a924cfc7, type: 3}
+  damage: 17

@@ -13,6 +13,12 @@ MonoBehaviour:
   m_Name: Wavekris
   m_EditorClassIdentifier: 
   type: 0
+  id: 9
   name: Wavekris
   sprite: {fileID: 21300000, guid: fb816cba53db5d541ad20e66c7a57d41, type: 3}
   prefab: {fileID: 7973158084973307045, guid: 8313f389934a3424390fa590c45a21ff, type: 3}
+  ammo: 20
+  ammoType: 0
+  shootRate: 0.25
+  shootAudio: {fileID: 8300000, guid: 38d95e38f52f6a54b888d9fd555fa1e3, type: 3}
+  damage: 40

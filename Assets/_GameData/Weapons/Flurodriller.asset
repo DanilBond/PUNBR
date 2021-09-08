@@ -13,6 +13,12 @@ MonoBehaviour:
   m_Name: Flurodriller
   m_EditorClassIdentifier: 
   type: 0
+  id: 3
   name: Flurodriller
   sprite: {fileID: 21300000, guid: 5185f6401d74d37468ae844b0ae228e6, type: 3}
   prefab: {fileID: 7973158084973307045, guid: ebf41dafaef4f884fb4b466a6682652a, type: 3}
+  ammo: 35
+  ammoType: 0
+  shootRate: 0.175
+  shootAudio: {fileID: 8300000, guid: c922c34f559ead440a273a13a924cfc7, type: 3}
+  damage: 20

@@ -4,12 +4,13 @@ using System.Data;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
+using Photon.Realtime;
+using UnityEngine.Animations.Rigging;
 
 [System.Serializable]
 class C_Audio
 {
     public AudioSource AS;
-    public AudioClip ShootAudio;
 
     public void PlayAudio(AudioClip AC)
     {
@@ -39,6 +40,9 @@ public class CharacterMovement : MonoBehaviour
     public VariableJoystick FJ2;
     public Animator anim;
     public Stats stats;
+    public Inventory inventory;
+    public RedZone redZone;
+    public Rig[] rigs;
     
 
     [Header("VALUES")]
@@ -46,14 +50,8 @@ public class CharacterMovement : MonoBehaviour
     public float movespeed;
     public float delayToDeactivate;
     public float ShootDelay;
-    public float Force;
-    public int BulletToSpawn;
     public float timer;
     public float timerG;
-    public float AngleInDegrees;
-    public float Y = -10f;
-    public float Ydefault = -10f; 
-    public float adderY = 4f;
 
     [Header("TRANSFORMS")]
     public Transform TargetTransform;
@@ -69,81 +67,102 @@ public class CharacterMovement : MonoBehaviour
     public bool DiffX;
     public bool IsAiming;
     public bool IsShooting;
+    public bool isInZone;
 
     void Start()
     {
         photonView = GetComponent<PhotonView>();
-        
+        redZone = FindObjectOfType<RedZone>();
         if (!photonView.IsMine)
         {            
             transform.parent.Find("Canvas").gameObject.SetActive(false);
             transform.parent.Find("Main Camera").gameObject.SetActive(false);
             GetComponent<CapsuleCollider>().radius = 0.8f;
         }
+        else
+        {
+            if (PhotonNetwork.IsMasterClient)
+            {
+                Vector3 startPos = redZone.GetRandomPosition();
+                photonView.RPC(nameof(SetRedZonePosition), RpcTarget.All, startPos);
+            }
+            StartCoroutine(Tick());
+        }
     }
 
+    [PunRPC]
+    void SetRedZonePosition(Vector3 pos)
+    {
+        if (redZone != null)
+        {
+            redZone.SetStartPosition(pos);
+        }
+        else
+        {
+            redZone = FindObjectOfType<RedZone>();
+            redZone.SetStartPosition(pos);
+        }
+    }
 
 
     void FixedUpdate()
     {
         Moving();
-        
     }
 
-    
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "Zone")
+        {
+            isInZone = true;
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Zone")
+        {
+            isInZone = false;
+        }
+    }
+
+    IEnumerator Tick()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+            if(isInZone == false)
+            {
+                stats.RemoveHp(stats.zoneDamage);
+            }
+            
+        }
+    }
+
 
     void Shoot()
     {
         if (photonView.IsMine == true)
         {
-            timer -= Time.deltaTime;
-            if (timer <= 0f)
-            {
-
-                for (int i = 0; i < BulletToSpawn; i++)
-                {
-                    quat = Quaternion.Euler(0, Y, 0);
-                    Muzzle.transform.localRotation = quat;
-
-                    GameObject bul = Instantiate(Bullet, Muzzle.transform.position, Muzzle.transform.rotation);
-                    bul.GetComponent<Bullet>().isFake = false;
-                    Y += adderY;
-                }
-                GameObject Eff = Instantiate(MuzzleEffect, Muzzle.transform.position, Muzzle.transform.rotation);
-                Destroy(Eff, 1f);
-                Y = Ydefault;
-                timer = ShootDelay;
-
-                camPivot.GetComponent<Animator>().SetTrigger("Shake");
-                C_Audio.PlayAudio(C_Audio.ShootAudio);
-            }
-        }
-        else
-        {
-            if (IsShooting)
-            {
+            
                 timer -= Time.deltaTime;
                 if (timer <= 0f)
                 {
 
-                    for (int i = 0; i < BulletToSpawn; i++)
-                    {
-                        quat = Quaternion.Euler(0, Y, 0);
-                        Muzzle.transform.localRotation = quat;
-
-                        GameObject bul = Instantiate(Bullet, Muzzle.transform.position, Muzzle.transform.rotation);
-                        bul.GetComponent<Bullet>().isFake = true;
-                        Y += adderY;
-                    }
+                    GameObject bul = Instantiate(Bullet, Muzzle.transform.position, Muzzle.transform.rotation);
+                    bul.GetComponent<Bullet>().isFake = false;
+                    bul.GetComponent<Bullet>().damage = inventory.currentItem.damage;
                     GameObject Eff = Instantiate(MuzzleEffect, Muzzle.transform.position, Muzzle.transform.rotation);
                     Destroy(Eff, 1f);
-                    Y = Ydefault;
-                    timer = ShootDelay;
-
-                    C_Audio.PlayAudio(C_Audio.ShootAudio);
+                    timer = inventory.currentItem.shootRate;
+                    inventory.currentAmmoCount--;
+                    photonView.RPC(nameof(FakeShoot), RpcTarget.All);
+                    camPivot.GetComponent<Animator>().SetTrigger("Shake");
+                    C_Audio.PlayAudio(inventory.currentItem.shootAudio);
                 }
-            }
         }
+
+
+
     }
 
     public void Moving()
@@ -161,9 +180,12 @@ public class CharacterMovement : MonoBehaviour
         {
             if (FJ2.IsPressed)
             {
-                Shoot();
-                MuzzleGraphical.SetActive(true);
-                isShooting = true;
+                if (inventory.currentAmmoCount > 0)
+                {
+                    Shoot();
+                    MuzzleGraphical.SetActive(true);
+                    isShooting = true;
+                }
             }
             else
             {
@@ -172,11 +194,19 @@ public class CharacterMovement : MonoBehaviour
                 isShooting = false;
             }
         }
-        else
-        {
-            Shoot();
-        }
     }
+
+
+    [PunRPC]
+    void FakeShoot()
+    {
+        GameObject bul = Instantiate(Bullet, Muzzle.transform.position, Muzzle.transform.rotation);
+        bul.GetComponent<Bullet>().isFake = false;
+        GameObject Eff = Instantiate(MuzzleEffect, Muzzle.transform.position, Muzzle.transform.rotation);
+        Destroy(Eff, 1f);
+        C_Audio.PlayAudio(inventory.currentItem.shootAudio);
+    }
+
 
     void Camera_AND_Input()
     {
@@ -240,18 +270,42 @@ public class CharacterMovement : MonoBehaviour
 
         if (deltaRot1.y != 0f || deltaRot1.x != 0f)
         {
-            if (DiffX == false && DiffY == false)
+            if(inventory.currentItem != null)
             {
-                anim.SetFloat("WalkFloat", 0.5f);
+                rigs[0].weight = 1;
+                rigs[1].weight = 1;
+                if (DiffX == false && DiffY == false)
+                {
+                    anim.SetFloat("WalkFloat", 0.5f);
+                }
+                if (DiffX == true || DiffY == true)
+                {
+                    anim.SetFloat("WalkFloat", 1f);
+                }
             }
-            if (DiffX == true || DiffY == true)
+            else
             {
-                anim.SetFloat("WalkFloat", 1f);
+                rigs[0].weight = 0;
+                rigs[1].weight = 0;
+                anim.SetFloat("WalkFloat", 2f);
             }
         }
         else
         {
-            anim.SetFloat("WalkFloat", 0f);
+            if (inventory.currentItem != null)
+            {
+                anim.SetFloat("WalkFloat", 0f);
+                rigs[0].weight = 1;
+                rigs[1].weight = 1;
+            }
+            else
+            {
+                anim.SetFloat("WalkFloat", 1.5f);
+                rigs[0].weight = 0;
+                rigs[1].weight = 0;
+            }
         }
     }
+
 }
+

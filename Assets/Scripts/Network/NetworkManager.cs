@@ -21,6 +21,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public bool isConnectedToMaster;
     public bool isConnectedToRoom;
     public bool isAdmin;
+    public bool isMaster;
     public float timeSinceRoomCreated;
     public int currentPlayerCountOnTheRoom;
     void Start()
@@ -106,7 +107,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
                 if (isAdmin)
                 {
                     timeSinceRoomCreated += Time.deltaTime;
-                    if (timeSinceRoomCreated >= 3 && ok)
+                    if (timeSinceRoomCreated >= 5 && ok)
                     {
                         PhotonNetwork.LoadLevel(1);
                         ok = false;
@@ -122,6 +123,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
                         ok = false;
                     }
                 }
+
+            isMaster = PhotonNetwork.IsMasterClient;
             }
     }
 

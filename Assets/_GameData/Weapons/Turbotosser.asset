@@ -13,6 +13,12 @@ MonoBehaviour:
   m_Name: Turbotosser
   m_EditorClassIdentifier: 
   type: 0
+  id: 8
   name: Turbotosser
   sprite: {fileID: 21300000, guid: 8690273e5ea377c4f8693703c5515969, type: 3}
   prefab: {fileID: 7973158084973307045, guid: 212694b0ce47dc54384be6ac288a4ac5, type: 3}
+  ammo: 25
+  ammoType: 0
+  shootRate: 0.2
+  shootAudio: {fileID: 8300000, guid: c9078c3724d980347b7b29c5e846c2bb, type: 3}
+  damage: 38

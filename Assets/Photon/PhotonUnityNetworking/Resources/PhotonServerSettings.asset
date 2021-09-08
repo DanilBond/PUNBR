@@ -41,6 +41,8 @@ MonoBehaviour:
   - RespawnSpaceship
   - IsShootingRegister
   - RegisterNickName
+  - FakeShoot
+  - SetRedZonePosition
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
